@@ -41,4 +41,5 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation "org.jetbrains.anko:anko-commons:0.10.5"
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.github.mukeshsolanki:liquidrefreshlayout:1.0.0'
 }

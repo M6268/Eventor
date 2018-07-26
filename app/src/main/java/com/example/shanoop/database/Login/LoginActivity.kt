@@ -1,12 +1,13 @@
-package com.example.shanoop.database
+package com.example.shanoop.database.Login
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.view.View.GONE
+import com.example.shanoop.database.Event.EventListActivity
+import com.example.shanoop.database.Helper.SESSION_STORAGE
+import com.example.shanoop.database.R
 import kotlinx.android.synthetic.main.activity_login.*
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
@@ -15,7 +16,6 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.uiThread
 import org.json.JSONObject
-import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
 
@@ -29,9 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    fun isUserLogged(): Boolean = getSharedPreferences(SESSION_STORAGE, 0).contains(SESSION_STORAGE)
-            &&
-            getSharedPreferences(SESSION_STORAGE, 0).getString(SESSION_STORAGE, "").isNotEmpty()
+    fun isUserLogged(): Boolean = getSharedPreferences(SESSION_STORAGE, 0).contains(SESSION_STORAGE)&&getSharedPreferences(SESSION_STORAGE, 0).getString(SESSION_STORAGE, "").isNotEmpty()
 
     fun verifyLogin(v: View) {
         if (usernameEditText.text.isEmpty())
@@ -40,9 +38,9 @@ class LoginActivity : AppCompatActivity() {
             passwordEditText.error = "Invalid Password"
         if (usernameEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()) {
             login()
-            loginButton.text="Loging In..."
-            loginProgressBar.visibility= View.VISIBLE
-            loginButton.isEnabled=false
+            loginButton.text = "Loging In..."
+            loginProgressBar.visibility = View.VISIBLE
+            loginButton.isEnabled = false
         }
     }
 
@@ -65,11 +63,10 @@ class LoginActivity : AppCompatActivity() {
 
             val result = JSONObject(response.body()!!.string())
             uiThread {
-                loginProgressBar.visibility=GONE
-                loginButton.isEnabled=true
-                loginButton.text="Login"
-                if(response.body()!=null)
-                {
+                loginProgressBar.visibility = GONE
+                loginButton.isEnabled = true
+                loginButton.text = "Login"
+                if (response.body() != null) {
                     when (response.code()) {
                         200 -> {
                             if (result.optBoolean("result", false)) {
@@ -77,19 +74,19 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intentFor<EventListActivity>())
                                 finish()
                             } else {
-                                Snackbar.make(root2, result.optString("message"), Snackbar.LENGTH_INDEFINITE).setAction("OK",object :View.OnClickListener{
+                                Snackbar.make(root2, result.optString("message"), Snackbar.LENGTH_INDEFINITE).setAction("OK", object : View.OnClickListener {
                                     override fun onClick(p0: View?) {
                                     }
                                 }).show()
                             }
                         }
                         400 -> {
-                            Snackbar.make(root2, result.optString("message"), Snackbar.LENGTH_INDEFINITE).setAction("OK", object:View.OnClickListener {
+                            Snackbar.make(root2, result.optString("message"), Snackbar.LENGTH_INDEFINITE).setAction("OK", object : View.OnClickListener {
                                 override fun onClick(p0: View?) {
                                 }
                             }).show()
                         }
-                        else->{
+                        else -> {
                             Snackbar.make(root2, "Something Went Wrong!", Snackbar.LENGTH_INDEFINITE).setAction("OK", object : View.OnClickListener {
                                 override fun onClick(p0: View?) {
 

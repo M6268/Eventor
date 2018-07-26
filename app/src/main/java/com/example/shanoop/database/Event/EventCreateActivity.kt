@@ -1,7 +1,8 @@
-package com.example.shanoop.database
+package com.example.shanoop.database.Event
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.shanoop.database.R
 
 class EventCreateActivity : AppCompatActivity() {
 
