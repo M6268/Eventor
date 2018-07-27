@@ -9,12 +9,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.example.shanoop.database.Event.Modal.Event
-import com.example.shanoop.database.Event.adapter.EventAdapter
+import com.example.shanoop.database.Event.Adapter.EventAdapter
 import com.example.shanoop.database.Helper.BASE_URL
 import com.example.shanoop.database.Helper.SESSION_STORAGE
 import com.example.shanoop.database.Login.LoginActivity
 import com.example.shanoop.database.R
-import com.madapps.liquid.LiquidRefreshLayout
 import kotlinx.android.synthetic.main.activity_event_list.*
 import kotlinx.android.synthetic.main.content_event_list.*
 import okhttp3.FormBody
